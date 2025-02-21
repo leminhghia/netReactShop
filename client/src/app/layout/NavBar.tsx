@@ -4,13 +4,15 @@ import {
   Badge,
   Box,
   IconButton,
+  LinearProgress,
   List,
   ListItem,
   Toolbar,
   Typography,
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
-
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { setDarkMode } from "./uiSlice";
 const midLinks = [
   { title: "catalog", path: "/catalog" },
   { title: "about", path: "/about" },
@@ -34,12 +36,14 @@ const navStyle = {
   },
 };
 
-type Props = {
-  toggleDarkMode: () => void;
-  darkMode: boolean;
-};
+// type Props = {
+  // toggleDarkMode: () => void;
+  // darkMode: boolean;
+// };
 
-const NavBar = ({ toggleDarkMode, darkMode }: Props) => {
+const NavBar = () => {
+  const{isLoading,darkMode} = useAppSelector(state =>state.ui)
+  const dispatch = useAppDispatch();
   return (
     <AppBar position="fixed">
       <Toolbar sx={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
@@ -47,7 +51,7 @@ const NavBar = ({ toggleDarkMode, darkMode }: Props) => {
           <Typography component={NavLink} sx={navStyle} to="/" variant="h6">
             Re-Store
           </Typography>
-          <IconButton onClick={toggleDarkMode}>
+          <IconButton onClick={()=>dispatch(setDarkMode())}>
             {darkMode ? <DarkMode /> : <LightMode sx={{ color: "yellow" }} />}
           </IconButton>
         </Box>
@@ -78,6 +82,11 @@ const NavBar = ({ toggleDarkMode, darkMode }: Props) => {
           </List>
         </Box>
       </Toolbar>
+      {isLoading&& (
+        <Box sx={{width:'100%'}}>
+          <LinearProgress color="secondary" />
+        </Box>
+      )}
     </AppBar>
   );
 };
