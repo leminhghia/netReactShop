@@ -13,13 +13,42 @@ import {
   Typography,
 } from "@mui/material";
 import { useFetchProductDetailsQuery } from "./catalogApi";
+import {
+  useAddBasketItemMutation,
+  useFetchBasketQuery,
+  useRemoveBasketItemMutation,
+} from "../home/basket/basketApi";
+import { ChangeEvent, useEffect, useState } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const {data: product, isLoading} = useFetchProductDetailsQuery(id ? +id : 0)
+  const [removeBasketItem] = useRemoveBasketItemMutation();
+  const [addBasketItem] = useAddBasketItemMutation();
+  const { data: basket } = useFetchBasketQuery();
+  const { data: product, isLoading } = useFetchProductDetailsQuery(
+    id ? +id : 0
+  );
+  const item = basket?.items.find((x) => x.productId === +id!); //3
+  const [quantity, setQuantity] = useState(0); // 5
 
- 
-  if (!product|| isLoading) return <div> Loading...</div>;
+  useEffect(() => {
+    if (item) return setQuantity(item.quantity);
+  }, [item]);
+
+  if (!product || isLoading) return <div> Loading...</div>;
+
+  const handleUpdateBasket = () => {
+    const updatedQuantity = item
+      ? Math.abs(quantity - item.quantity)
+      : quantity;
+    if (!item || quantity > item.quantity) addBasketItem({ product, quantity:updatedQuantity });
+    else removeBasketItem({productId: product.id, quantity: updatedQuantity})
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = +event.currentTarget.value;
+    if (value >= 0) setQuantity(value);
+  };
 
   const productDetails = [
     { Label: "Name", value: product.name },
@@ -53,8 +82,10 @@ const ProductDetails = () => {
             <TableBody>
               {productDetails.map((details, index) => (
                 // tr
-                <TableRow key={index}> 
-                  <TableCell sx={{ fontWeight: "bold" }}>  {/* td */}
+                <TableRow key={index}>
+                  <TableCell sx={{ fontWeight: "bold" }}>
+                    {" "}
+                    {/* td */}
                     {details.Label}
                   </TableCell>
                   <TableCell>{details.value}</TableCell>
@@ -70,12 +101,23 @@ const ProductDetails = () => {
               type="number"
               label="Quantity in basket"
               fullWidth
-              defaultValue={1}
+              value={quantity}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid size={6}>
-            <Button sx={{height:'55px'}} color="primary" size="large" variant="contained" fullWidth>
-              Add to Basket
+            <Button
+              sx={{ height: "55px" }}
+              color="primary"
+              size="large"
+              variant="contained"
+              fullWidth
+              onClick={handleUpdateBasket}
+              disabled={
+                quantity === item?.quantity || (!item && quantity === 0)
+              }
+            >
+            {item ? 'Update Quantity': 'Add to basket'}
             </Button>
           </Grid>
         </Grid>

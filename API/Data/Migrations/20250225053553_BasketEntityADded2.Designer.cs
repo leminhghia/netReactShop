@@ -2,6 +2,7 @@
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20250225053553_BasketEntityADded2")]
+    partial class BasketEntityADded2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
@@ -37,7 +40,7 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("BasketId")
+                    b.Property<int?>("BasketId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("ProductId")
@@ -94,19 +97,15 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.BasketItem", b =>
                 {
-                    b.HasOne("API.Entities.Basket", "Basket")
+                    b.HasOne("API.Entities.Basket", null)
                         .WithMany("Items")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BasketId");
 
                     b.HasOne("API.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Basket");
 
                     b.Navigation("Product");
                 });
