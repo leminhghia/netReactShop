@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import {  Grid2 } from "@mui/material";
 import { IProduct } from "../../app/models/product";
 import ProductCard from "./ProductCard";
 
@@ -6,27 +6,18 @@ type Props = {
   product: IProduct[];
 };
 
-
 const ProductList = ({ product }: Props) => {
   return (
     <div>
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 3,
-          justifyContent: "center",
-        }}
-      >
+      <Grid2 container spacing={3}>
         {/* dung {} la phai return */}
         {/* props.rpodcuts.map... */}
-        {
-            product.map(product =>(
-                <ProductCard key={product.id} product={product} />
-
-            ))
-        }
-      </Box>
+        {product.map((product) => (
+          <Grid2 size={3} display='flex' key={product.id}>
+            <ProductCard  product={product} />
+          </Grid2>
+        ))}
+      </Grid2>
     </div>
   );
 };
