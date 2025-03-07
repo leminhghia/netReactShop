@@ -1,20 +1,33 @@
 using API.Data;
+using API.Entities;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 // cai npm i vite-plugin-mkcert -D, de code react, khi co san pham thi ko can xai nua
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDbContext<StoreContext>(opt => 
+builder.Services.AddDbContext<StoreContext>(opt =>
 {
-opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
 // transient, scopes, singleton
 //scopes chay het request, toi response thi chet
 // khi chay het service
 builder.Services.AddTransient<ExecptionMiddleware>();
+
+//section 9 step 2 (
+builder.Services.AddIdentityApiEndpoints<User>(opt =>
+{
+    opt.User.RequireUniqueEmail = true;
+})
+
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<StoreContext>();
+
+//)
 var app = builder.Build();
 
 
@@ -22,11 +35,17 @@ var app = builder.Build();
 app.UseMiddleware<ExecptionMiddleware>();
 app.UseCors(opt =>
 {
-opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
 });
+
+//section 9(
+app.UseAuthentication();// biet ai la admin ...
+app.UseAuthorization();// xac dinh nguoif dung dc lam gi
+app.MapGroup("api").MapIdentityApi<User>();// muon ssu dung identity, thi url phai co"api"
+//)
 
 app.MapControllers();
 
-DbInitializer.InitDb(app);
+await DbInitializer.InitDb(app);
 
 app.Run();
