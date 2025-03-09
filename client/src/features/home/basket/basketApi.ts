@@ -2,6 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithErrorHandling } from "../../../app/api/baseApi";
 import { IBasket, IItem } from "../../../app/models/basket";
 import { IProduct } from "../../../app/models/product";
+import Cookies from 'js-cookie'
 function isBasketItem(product: IProduct | IItem): product is IItem {
     return (product as IItem).quantity !== undefined;
 
@@ -38,14 +39,15 @@ export const basketApi = createApi({
                             if (existingItem) existingItem.quantity += quantity;
                             else draft.items.push(isBasketItem(product) ? product : { ...product, productId: product.id, quantity });
                         }
-                       
+
 
                     })
                 )
 
                 try {
                     await queryFulfilled;
-                    if(isNewBasket) dispatch(basketApi.util.invalidateTags(['Basket']))                } catch (error) {
+                    if (isNewBasket) dispatch(basketApi.util.invalidateTags(['Basket']))
+                } catch (error) {
                     console.log(error)
                     patchResult.undo();
                 }
@@ -76,8 +78,21 @@ export const basketApi = createApi({
 
                 }
             }
+        }),
+        //parameter, return
+        //mutaion <void,void>
+        clearBakset: builder.mutation<void, void>({
+            queryFn: () => ({ data: undefined }),
+            onQueryStarted: async (_, { dispatch }) => {
+                dispatch(
+                    basketApi.util.updateQueryData('fetchBasket', undefined, (draft) => {
+                        draft.items = [];
+                    })
+                );
+                Cookies.remove('basketId');
+            }
         })
     })
 });
 
-export const { useFetchBasketQuery, useAddBasketItemMutation, useRemoveBasketItemMutation } = basketApi;
+export const { useFetchBasketQuery, useAddBasketItemMutation, useRemoveBasketItemMutation, useClearBaksetMutation } = basketApi;

@@ -8,4 +8,7 @@ public class BasketDto
     public required string BasketId { get; set; }
     //1 to many
     public List<BasketItemDto> Items { get; set; } = [];
+    public string? ClientSecret { get; set; }
+
+    public string? PaymentIntentId { get; set; }
 }

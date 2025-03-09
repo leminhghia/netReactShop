@@ -15,5 +15,5 @@ public class Address
 
     [JsonPropertyName("postal_code")]
     public required string PostalCode { get; set; }  
-    public required int Country { get; set; }
+    public required string Country { get; set; }
 }

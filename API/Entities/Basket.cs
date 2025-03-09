@@ -8,7 +8,9 @@ public class Basket
     public required string BasketId { get; set; }
     //1 to many
     public List<BasketItem> Items { get; set; } = [];
+    public string? ClientSecret { get; set; }
 
+    public string? PaymentIntentId { get; set; }
     public void AddItem(Product product, int quantity)
     {
         if (product == null) ArgumentNullException.ThrowIfNull(product);
@@ -33,14 +35,14 @@ public class Basket
     public void RemoveItem(int productId, int quantity)
     {
         if (quantity <= 0) throw new ArgumentException("Quantity should be greater than zero", nameof(quantity));
-       
-       var item = FindItem(productId);
-       if (item == null) return;
 
-       item.Quantity -= quantity;
-       if (item.Quantity <=0) Items.Remove(item);
-       
-       
+        var item = FindItem(productId);
+        if (item == null) return;
+
+        item.Quantity -= quantity;
+        if (item.Quantity <= 0) Items.Remove(item);
+
+
     }
 
 

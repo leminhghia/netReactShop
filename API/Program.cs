@@ -1,6 +1,7 @@
 using API.Data;
 using API.Entities;
 using API.Middleware;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,9 @@ builder.Services.AddCors();
 //scopes chay het request, toi response thi chet
 // khi chay het service
 builder.Services.AddTransient<ExecptionMiddleware>();
+builder.Services.AddScoped<PaymentsServices>();
+
+
 
 //section 9 step 2 (
 builder.Services.AddIdentityApiEndpoints<User>(opt =>

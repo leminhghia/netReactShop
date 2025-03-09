@@ -1,12 +1,14 @@
-import {IProduct} from './product'
+import { IProduct } from './product'
 
 export interface IBasket {
   basketId: string;
   items: IItem[];
+  clientSecret?: string
+  paymentIntentId?: string
 }
 
 export class IItem {
-  constructor(product:IProduct, quantity: number){
+  constructor(product: IProduct, quantity: number) {
     this.productId = product.id;
     this.name = product.name;
     this.price = product.price;
