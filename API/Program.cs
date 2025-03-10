@@ -11,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    // opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+
 });
 builder.Services.AddCors();
 // transient, scopes, singleton
@@ -37,6 +39,10 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExecptionMiddleware>();
+//section 12 (
+app.UseDefaultFiles();
+app.UseStaticFiles();
+//)
 app.UseCors(opt =>
 {
     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
@@ -47,7 +53,9 @@ app.UseAuthentication();// biet ai la admin ...
 app.UseAuthorization();// xac dinh nguoif dung dc lam gi
 app.MapGroup("api").MapIdentityApi<User>();// muon ssu dung identity, thi url phai co"api"
 //)
-
+//section 12 (
+app.MapFallbackToController("Index","Fallback");
+//)
 app.MapControllers();
 
 await DbInitializer.InitDb(app);
