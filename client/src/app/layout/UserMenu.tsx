@@ -11,6 +11,7 @@ import { useState } from "react";
 import { IUser } from "../models/user";
 import { History, Logout, Person } from "@mui/icons-material";
 import { useLogoutMutation } from "../../features/Account/accountApi";
+import { Link } from "react-router-dom";
 
 type Props = {
   user: IUser;
@@ -46,7 +47,7 @@ const UserMenu = ({ user }: Props) => {
             <ListItemText>My profile</ListItemText>
           </ListItemIcon>
         </MenuItem>
-        <MenuItem>
+        <MenuItem component={Link} to='/orders'>
           <ListItemIcon>
             <History />
             <ListItemText>My order</ListItemText>

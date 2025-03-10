@@ -1,5 +1,6 @@
 using System;
 using API.Entities;
+using API.Entities.OderAggregate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ public class StoreContext(DbContextOptions options) : IdentityDbContext<User>(op
 {
     public required DbSet<Product> Products { get; set; }
     public required DbSet<Basket> Baskets { get; set; }
+    public required DbSet<Order> Orders { get; set; }
 
     // section 9 step 1
     protected override void OnModelCreating(ModelBuilder builder)

@@ -1,3 +1,5 @@
+import { IPaymentSummary, IShippingAddress } from "../app/models/order";
+
 export function currencyFormat(amount: number) {
     return '$' + (amount / 100).toFixed(2);
 }
@@ -9,4 +11,14 @@ export function filterEmptyValue(values: object) {
                 value !== undefined && value.length !== 0
         )
     )
+}
+
+export const formatAddressString = (address: IShippingAddress) => {
+    return `${address?.name}, ${address?.line1}, ${address?.city}, ${address?.state}, 
+            ${address?.postal_code}, ${address?.country}`
+}
+
+export const formatPaymentString = (card: IPaymentSummary) => {
+    return `${card?.brand?.toUpperCase()}, **** **** **** ${card?.last4}, 
+            Exp: ${card?.exp_month}/${card?.exp_year}`
 }
