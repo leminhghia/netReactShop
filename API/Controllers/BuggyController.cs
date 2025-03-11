@@ -33,9 +33,9 @@ public class BuggyController : BaseApiController
         return ValidationProblem();
     }
 
-      [HttpGet("server-error")]
-    public IActionResult GetSeverError()
-    {
-        throw new Exception("This is a server error");
-    }
+ [HttpGet("server-error")]
+public IActionResult GetSeverError()
+{
+    throw new Exception("This is a server error");
+}
 }
