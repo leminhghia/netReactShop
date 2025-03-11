@@ -1,8 +1,8 @@
 import { Box, Grid2, IconButton, Paper, Typography } from "@mui/material";
-import { IItem } from "../../../app/models/basket";
+import { IItem } from "../../app/models/basket";
 import { Add, Close, Remove } from "@mui/icons-material";
 import { useAddBasketItemMutation, useRemoveBasketItemMutation } from "./basketApi";
-import { currencyFormat } from "../../../lib/util";
+import { currencyFormat } from "../../lib/util";
 
 interface Props {
   item: IItem;

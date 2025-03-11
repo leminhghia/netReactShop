@@ -7,7 +7,7 @@ import AboutPage from "../features/about/AboutPage";
 import ContactPage from "../features/contact/ContactPage";
 import ServerErros from "../app/errors/ServerErros";
 import NotFound from "../app/errors/NotFound";
-import Basket from "../features/home/basket/Basket";
+import Basket from "../features/basket/Basket";
 import CheckoutPage from "../features/checkout/CheckoutPage";
 import LoginForm from "../features/Account/LoginForm";
 import RegisterForm from "../features/Account/RegisterForm";

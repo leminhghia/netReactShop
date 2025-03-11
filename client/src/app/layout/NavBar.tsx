@@ -13,7 +13,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { setDarkMode } from "./uiSlice";
-import { useFetchBasketQuery } from "../../features/home/basket/basketApi";
+import { useFetchBasketQuery } from "../../features/basket/basketApi";
 import UserMenu from "./UserMenu";
 import { useUserInfoQuery } from "../../features/Account/accountApi";
 const midLinks = [

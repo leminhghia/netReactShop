@@ -1,5 +1,5 @@
 import { IItem } from "../../app/models/basket";
-import { useClearBaksetMutation, useFetchBasketQuery } from "../../features/home/basket/basketApi";
+import { useClearBaksetMutation, useFetchBasketQuery } from "../../features/basket/basketApi";
 
 export const useBasket = () =>{
     const {data: basket} = useFetchBasketQuery();

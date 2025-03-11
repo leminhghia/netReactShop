@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { catalogApi } from "../../features/catalog/catalogApi";
 import { uiSlice } from "../layout/uiSlice";
 import { errorApi } from "../../features/about/errorApi";
-import { basketApi } from "../../features/home/basket/basketApi";
+import { basketApi } from "../../features/basket/basketApi";
 import { catalogSlice } from "../../features/catalog/catalogSlice";
 import { accountApi } from "../../features/Account/accountApi";
 import { checkoutApi } from "../../features/checkout/CheckoutApi";

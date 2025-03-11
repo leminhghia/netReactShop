@@ -1,7 +1,7 @@
 import { Grid2, Typography } from "@mui/material";
 import { useFetchBasketQuery } from "./basketApi";
 import BasketItem from "./BasketItem";
-import OrderSummary from "../../../app/shared/components/OrderSummary";
+import OrderSummary from "../../app/shared/components/OrderSummary";
 
 const Basket = () => {
   const { data, isLoading } = useFetchBasketQuery();

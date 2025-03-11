@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithErrorHandling } from "../../app/api/baseApi";
 import { IBasket } from "../../app/models/basket";
-import { basketApi } from "../home/basket/basketApi";
+import { basketApi } from "../basket/basketApi";
 
 export const checkoutApi = createApi({
     reducerPath: 'checkoutapi',

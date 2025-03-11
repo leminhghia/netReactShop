@@ -17,7 +17,7 @@ import {
   useAddBasketItemMutation,
   useFetchBasketQuery,
   useRemoveBasketItemMutation,
-} from "../home/basket/basketApi";
+} from "../basket/basketApi";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const ProductDetails = () => {

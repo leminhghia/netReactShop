@@ -3,7 +3,7 @@ import OrderSummary from "../../app/shared/components/OrderSummary";
 import CheckoutStepper from "./CheckoutStepper";
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { useFetchBasketQuery } from "../home/basket/basketApi";
+import { useFetchBasketQuery } from "../basket/basketApi";
 import { useEffect, useMemo, useRef } from "react";
 import { useCreatePaymentIntentMutation } from "./CheckoutApi";
 import { useAppSelector } from "../../app/store/store";

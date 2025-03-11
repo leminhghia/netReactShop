@@ -1,8 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQueryWithErrorHandling } from "../../../app/api/baseApi";
-import { IBasket, IItem } from "../../../app/models/basket";
-import { IProduct } from "../../../app/models/product";
+import { baseQueryWithErrorHandling } from "../../app/api/baseApi";
 import Cookies from 'js-cookie'
+import { IItem, IBasket } from "../../app/models/basket";
+import { IProduct } from "../../app/models/product";
 function isBasketItem(product: IProduct | IItem): product is IItem {
     return (product as IItem).quantity !== undefined;
 
@@ -10,8 +10,8 @@ function isBasketItem(product: IProduct | IItem): product is IItem {
 
 export const basketApi = createApi({
     reducerPath: 'basketApi',
-    tagTypes: ['Basket'],
     baseQuery: baseQueryWithErrorHandling,
+    tagTypes: ['Basket'],
     endpoints: (builder) => ({
         fetchBasket: builder.query<IBasket, void>({
             query: () => 'basket',
@@ -33,22 +33,23 @@ export const basketApi = createApi({
                     basketApi.util.updateQueryData('fetchBasket', undefined, (draft) => {
                         const productId = isBasketItem(product) ? product.productId : product.id;
 
-                        if (!draft.basketId) isNewBasket = true;
+                        if (!draft?.basketId) isNewBasket = true;
+
                         if (!isNewBasket) {
-                            const existingItem = draft.items.find(item => item.productId === productId)
+                            const existingItem = draft.items.find(item => item.productId === productId);
                             if (existingItem) existingItem.quantity += quantity;
-                            else draft.items.push(isBasketItem(product) ? product : { ...product, productId: product.id, quantity });
+                            else draft.items.push(isBasketItem(product) 
+                                ? product : {...product, productId: product.id, quantity});
                         }
-
-
                     })
                 )
 
                 try {
                     await queryFulfilled;
-                    dispatch(basketApi.util.invalidateTags(['Basket']));
+
+                    if (isNewBasket) dispatch(basketApi.util.invalidateTags(['Basket']))
                 } catch (error) {
-                    console.log(error)
+                    console.log(error);
                     patchResult.undo();
                 }
             }
@@ -61,7 +62,7 @@ export const basketApi = createApi({
             onQueryStarted: async ({ productId, quantity }, { dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     basketApi.util.updateQueryData('fetchBasket', undefined, (draft) => {
-                        const itemIndex = draft.items.findIndex(item => item.productId === productId)
+                        const itemIndex = draft.items.findIndex(item => item.productId === productId);
                         if (itemIndex >= 0) {
                             draft.items[itemIndex].quantity -= quantity;
                             if (draft.items[itemIndex].quantity <= 0) {
@@ -70,12 +71,12 @@ export const basketApi = createApi({
                         }
                     })
                 )
+
                 try {
                     await queryFulfilled;
                 } catch (error) {
                     console.log(error);
                     patchResult.undo();
-
                 }
             }
         }),
