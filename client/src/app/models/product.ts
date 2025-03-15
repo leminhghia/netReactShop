@@ -6,6 +6,6 @@ export interface IProduct  {
     pictureUrl: string
     type: string
     brand: string
-    quanityInStock: number
+    quantityInStock: number
   }
   

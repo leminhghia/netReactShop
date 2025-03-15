@@ -84,7 +84,7 @@ public class PaymentsController(PaymentsServices paymentServices,
             .FindAsync(item.ItemOrdered.ProductId)
             ?? throw new Exception("Problem updating order stock");
 
-            productItem.QuanityInStock += item.Quantity;
+            productItem.QuantityInStock  += item.Quantity;
         }
         order.OrderStatus = OrderStatus.PaymentFailed;
         await context.SaveChangesAsync();

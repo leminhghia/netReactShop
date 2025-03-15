@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { IUser } from "../models/user";
-import { History, Logout, Person } from "@mui/icons-material";
+import {  AdminPanelSettingsOutlined, History, Logout, Person } from "@mui/icons-material";
 import { useLogoutMutation } from "../../features/Account/accountApi";
 import { Link } from "react-router-dom";
 
@@ -30,7 +30,14 @@ const UserMenu = ({ user }: Props) => {
 
   return (
     <div>
-      <Button color="inherit" size="large" sx={{fontSize:'1.1rem'}} onClick={handleClick}>{user.email}</Button>
+      <Button
+        color="inherit"
+        size="large"
+        sx={{ fontSize: "1.1rem" }}
+        onClick={handleClick}
+      >
+        {user.email}
+      </Button>
       <Menu
         id="fade-menu"
         MenuListProps={{
@@ -42,20 +49,28 @@ const UserMenu = ({ user }: Props) => {
         TransitionComponent={Fade}
       >
         <MenuItem>
-          <ListItemIcon>
+          <ListItemIcon sx={{ gap: 1 }}>
             <Person />
             <ListItemText>My profile</ListItemText>
           </ListItemIcon>
         </MenuItem>
-        <MenuItem component={Link} to='/orders'>
-          <ListItemIcon>
+        <MenuItem component={Link} to="/orders">
+          <ListItemIcon sx={{ gap: 1 }}>
             <History />
             <ListItemText>My order</ListItemText>
           </ListItemIcon>
         </MenuItem>
+
+        <MenuItem component={Link} to="/iventory">
+          <ListItemIcon sx={{ gap: 1 }}>
+            <AdminPanelSettingsOutlined />
+            <ListItemText>Admin</ListItemText>
+          </ListItemIcon>
+        </MenuItem>
+
         <Divider />
         <MenuItem onClick={logout}>
-          <ListItemIcon>
+          <ListItemIcon sx={{ px: 1 }}>
             <Logout />
             <ListItemText>Logout</ListItemText>
           </ListItemIcon>

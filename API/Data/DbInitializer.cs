@@ -59,7 +59,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-ang1.png",
                     Brand = "Angular",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -69,7 +69,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-ang2.png",
                     Brand = "Angular",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -80,7 +80,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-core1.png",
                     Brand = "NetCore",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -91,7 +91,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-core2.png",
                     Brand = "NetCore",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -102,7 +102,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-react1.png",
                     Brand = "React",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -113,7 +113,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/sb-ts1.png",
                     Brand = "TypeScript",
                     Type = "Boards",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -124,7 +124,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/hat-core1.png",
                     Brand = "NetCore",
                     Type = "Hats",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -135,7 +135,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/hat-react1.png",
                     Brand = "React",
                     Type = "Hats",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -146,7 +146,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/hat-react2.png",
                     Brand = "React",
                     Type = "Hats",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -157,7 +157,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/glove-code1.png",
                     Brand = "VS Code",
                     Type = "Gloves",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -168,7 +168,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/glove-code2.png",
                     Brand = "VS Code",
                     Type = "Gloves",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -179,7 +179,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/glove-react1.png",
                     Brand = "React",
                     Type = "Gloves",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -190,7 +190,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/glove-react2.png",
                     Brand = "React",
                     Type = "Gloves",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -201,7 +201,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/boot-redis1.png",
                     Brand = "Redis",
                     Type = "Boots",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -212,7 +212,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/boot-core2.png",
                     Brand = "NetCore",
                     Type = "Boots",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -223,7 +223,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/boot-core1.png",
                     Brand = "NetCore",
                     Type = "Boots",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -233,7 +233,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/boot-ang2.png",
                     Brand = "Angular",
                     Type = "Boots",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
                 new Product
                 {
@@ -244,7 +244,7 @@ public class DbInitializer
                     PictureUrl = "/images/products/boot-ang1.png",
                     Brand = "Angular",
                     Type = "Boots",
-                    QuanityInStock = 100
+                    QuantityInStock  = 100
                 },
        };
         context.Products.AddRange(products);

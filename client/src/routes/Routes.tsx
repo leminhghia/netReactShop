@@ -15,6 +15,7 @@ import RequiredAuth from "./RequiredAuth";
 import CheckoutSuccess from "../features/checkout/CheckoutSuccess";
 import OrdersPage from "../features/orders/OrdersPage";
 import OrderDetailedPage from "../features/orders/OrderDetailedPage";
+import IventoryPage from "../features/admin/IventoryPage";
 
 export const router = createBrowserRouter([
     {
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
                 {path:'/checkout/success',element:<CheckoutSuccess/>},
                 {path:'/orders',element:<OrdersPage/>},
                 {path:'/orders/:id',element:<OrderDetailedPage/>},
+                {path:'/iventory',element:<IventoryPage/>},
 
             ]},
             {path:'',element:<HomePage/>},
