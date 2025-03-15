@@ -55,7 +55,7 @@ const ProductDetails = () => {
     { Label: "Description", value: product.description },
     { Label: "Type", value: product.type },
     { Label: "Brand", value: product.brand },
-    { Label: "Quantity in stock", value: product.quanityInStock },
+    { Label: "Quantity in stock", value: product.quantityInStock },
   ];
 
   return (
