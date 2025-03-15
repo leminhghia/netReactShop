@@ -1,6 +1,7 @@
 using API.Data;
 using API.Entities;
 using API.Middleware;
+using API.RequestHelpers;
 using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 // cai npm i vite-plugin-mkcert -D, de code react, khi co san pham thi ko can xai nua
 // Add services to the container.
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
+
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(opt =>
 {
@@ -16,11 +19,16 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 
 });
 builder.Services.AddCors();
+//section 13
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//
+
 // transient, scopes, singleton
 //scopes chay het request, toi response thi chet
 // khi chay het service
 builder.Services.AddTransient<ExecptionMiddleware>();
 builder.Services.AddScoped<PaymentsServices>();
+builder.Services.AddScoped<ImageService>();
 
 
 
@@ -45,7 +53,7 @@ app.UseStaticFiles();
 //)
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3000");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:3001");
 });
 
 //section 9(

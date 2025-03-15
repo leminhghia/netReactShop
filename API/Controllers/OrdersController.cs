@@ -88,7 +88,7 @@ public class OrdersController(StoreContext context) : BaseApiController
 
         foreach (var item in items)
         {
-            if (item.Product.QuanityInStock < item.Quantity)
+            if (item.Product.QuantityInStock  < item.Quantity)
                 return null;
 
             var orderItem = new OrderItem
@@ -104,7 +104,7 @@ public class OrdersController(StoreContext context) : BaseApiController
             };
             orderItems.Add(orderItem);
 
-            item.Product.QuanityInStock -= item.Quantity;
+            item.Product.QuantityInStock  -= item.Quantity;
         }
         return orderItems;
     }
